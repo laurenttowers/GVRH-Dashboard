@@ -1,0 +1,6 @@
+{
+  "name": "GVRH-Bot Admin Dashboard",
+  "description": "A comprehensive, secure, and user-friendly web-based admin dashboard for the GVRH-Bot. This dashboard will serve as the central hub for administrators to manage all aspects of the bot, including user registrations, session management, and system health monitoring.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
