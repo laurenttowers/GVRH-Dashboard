@@ -1,7 +1,6 @@
 
 import React, { useState, useCallback } from 'react';
 import { AppView, NotificationType } from './types';
-import { DashboardIcon, UsersIcon, SessionsIcon, ToolsIcon, WebhookIcon, HelpIcon, LogoutIcon } from './components/icons';
 import Dashboard from './components/Dashboard';
 import UserManagement from './components/UserManagement';
 import SessionManagement from './components/SessionManagement';
@@ -56,10 +55,10 @@ const App: React.FC = () => {
 
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-900">
-        <div className="text-center p-8 bg-gray-800 rounded-lg shadow-xl border border-gray-700">
-          <h1 className="text-3xl font-bold text-white mb-2">GVRH-Bot Admin</h1>
-          <p className="text-gray-400 mb-6">Please log in to continue.</p>
+      <div className="min-h-screen flex items-center justify-center bg-[#f5f5f7]">
+        <div className="text-center p-8 bg-white rounded-xl shadow-lg border border-gray-200">
+          <h1 className="text-3xl font-semibold mb-2 text-gray-900">GVRH-Bot Admin</h1>
+          <p className="text-gray-600 mb-6">Please log in to continue.</p>
           <Button onClick={handleLogin}>Login with Discord</Button>
         </div>
       </div>
@@ -67,82 +66,67 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="flex h-screen bg-gray-900 text-gray-100">
+    <div className="min-h-screen flex flex-col bg-[#f5f5f7] text-gray-900">
       <NotificationContainer notifications={notifications} onDismiss={dismissNotification} />
-      <Sidebar currentView={view} setView={setView} onLogout={handleLogout} />
-      <main className="flex-1 p-6 md:p-10 overflow-y-auto">
+      <TopNav currentView={view} setView={setView} onLogout={handleLogout} />
+      <main className="flex-1 p-6 md:p-10">
         {renderView()}
       </main>
     </div>
   );
 };
 
-// Sidebar Navigation Component
 const NavItem: React.FC<{
   viewName: AppView;
   label: string;
-  icon: React.ReactNode;
   currentView: AppView;
   setView: (view: AppView) => void;
-}> = ({ viewName, label, icon, currentView, setView }) => (
-  <li>
-    <a
-      href="#"
-      onClick={(e) => { e.preventDefault(); setView(viewName); }}
-      className={`flex items-center p-3 my-1 rounded-lg transition-colors ${
-        currentView === viewName
-          ? 'bg-blue-600 text-white'
-          : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-      }`}
-    >
-      {icon}
-      <span className="ml-3 font-medium">{label}</span>
-    </a>
-  </li>
+}> = ({ viewName, label, currentView, setView }) => (
+  <a
+    href="#"
+    onClick={(e) => { e.preventDefault(); setView(viewName); }}
+    className={`text-sm ${currentView === viewName ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
+  >
+    {label}
+  </a>
 );
 
-const Sidebar: React.FC<{
+const TopNav: React.FC<{
   currentView: AppView;
   setView: (view: AppView) => void;
   onLogout: () => void;
 }> = ({ currentView, setView, onLogout }) => {
-    const navItems = [
-        { view: 'DASHBOARD', label: 'Dashboard', icon: <DashboardIcon className="w-6 h-6" /> },
-        { view: 'USERS', label: 'Users', icon: <UsersIcon className="w-6 h-6" /> },
-        { view: 'SESSIONS', label: 'Sessions', icon: <SessionsIcon className="w-6 h-6" /> },
-        { view: 'TOOLS', label: 'Admin Tools', icon: <ToolsIcon className="w-6 h-6" /> },
-        { view: 'WEBHOOK', label: 'Webhook', icon: <WebhookIcon className="w-6 h-6" /> },
-        { view: 'HELP', label: 'Help', icon: <HelpIcon className="w-6 h-6" /> },
-    ];
-    
+  const navItems = [
+    { view: 'DASHBOARD', label: 'Dashboard' },
+    { view: 'USERS', label: 'Users' },
+    { view: 'SESSIONS', label: 'Sessions' },
+    { view: 'TOOLS', label: 'Admin Tools' },
+    { view: 'WEBHOOK', label: 'Webhook' },
+    { view: 'HELP', label: 'Help' },
+  ];
+
   return (
-    <aside className="w-64 bg-gray-800 border-r border-gray-700 flex flex-col p-4">
-      <div className="text-2xl font-bold text-white mb-8 px-2">GVRH-Bot</div>
-      <nav className="flex-1">
-        <ul>
-            {navItems.map(item => (
-                 <NavItem 
-                    key={item.view}
-                    viewName={item.view as AppView}
-                    label={item.label}
-                    icon={item.icon}
-                    currentView={currentView}
-                    setView={setView}
-                 />
-            ))}
-        </ul>
-      </nav>
-      <div>
-        <a
-          href="#"
-          onClick={(e) => { e.preventDefault(); onLogout(); }}
-          className="flex items-center p-3 my-1 rounded-lg text-red-400 hover:bg-red-500 hover:text-white transition-colors"
-        >
-          <LogoutIcon className="w-6 h-6" />
-          <span className="ml-3 font-medium">Logout</span>
-        </a>
+    <nav className="apple-nav h-11 flex items-center px-6">
+      <div className="font-semibold">GVRH-Bot</div>
+      <div className="flex-1 flex justify-center space-x-8">
+        {navItems.map(item => (
+          <NavItem
+            key={item.view}
+            viewName={item.view as AppView}
+            label={item.label}
+            currentView={currentView}
+            setView={setView}
+          />
+        ))}
       </div>
-    </aside>
+      <a
+        href="#"
+        onClick={(e) => { e.preventDefault(); onLogout(); }}
+        className="text-sm opacity-80 hover:opacity-100"
+      >
+        Logout
+      </a>
+    </nav>
   );
 };
 

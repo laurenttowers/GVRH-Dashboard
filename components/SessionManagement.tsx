@@ -67,7 +67,7 @@ const SessionManagement: React.FC<{ showNotification: (type: 'success' | 'error'
   return (
     <div className="animate-fade-in">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-white">Session Management</h1>
+        <h1 className="text-3xl font-semibold">Session Management</h1>
         <Button onClick={() => openModal('new')}>Start New Session</Button>
       </div>
 
@@ -76,14 +76,14 @@ const SessionManagement: React.FC<{ showNotification: (type: 'success' | 'error'
           <Card key={session.id} className="flex flex-col">
             <div className="flex-grow">
               <div className="flex justify-between items-start">
-                  <h2 className="text-xl font-bold text-blue-400">{session.type}</h2>
-                  <span className="text-xs font-semibold bg-gray-700 text-gray-300 px-2 py-1 rounded-full">{session.participants} members</span>
+                  <h2 className="text-xl font-semibold text-blue-500">{session.type}</h2>
+                  <span className="text-xs font-semibold bg-gray-100 text-gray-600 px-2 py-1 rounded-full">{session.participants} members</span>
               </div>
               <p className="text-sm text-gray-500 mt-1">Hosted by {session.host}</p>
-              <p className="mt-4 text-gray-300">{session.description}</p>
+              <p className="mt-4 text-gray-700">{session.description}</p>
             </div>
-            <div className="border-t border-gray-700 mt-4 pt-4 flex justify-between items-center">
-              <p className="text-xs text-gray-400">Started: {session.startTime}</p>
+            <div className="border-t border-gray-200 mt-4 pt-4 flex justify-between items-center">
+              <p className="text-xs text-gray-500">Started: {session.startTime}</p>
               <div className="flex gap-2">
                 <Button variant="secondary" size="sm" onClick={() => openModal('edit', session)}>Edit</Button>
                 <Button variant="danger" size="sm" onClick={() => handleEndSession(session.id)}>End</Button>
@@ -99,26 +99,26 @@ const SessionManagement: React.FC<{ showNotification: (type: 'success' | 'error'
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title={modalMode === 'new' ? 'Start a New Session' : 'Edit Session'}>
         <div className="space-y-4">
           <div>
-            <label htmlFor="type" className="block text-sm font-medium text-gray-300 mb-1">Session Type</label>
+            <label htmlFor="type" className="block text-sm font-medium text-gray-700 mb-1">Session Type</label>
             <input
               type="text"
               id="type"
               name="type"
               value={sessionForm.type}
               onChange={handleFormChange}
-              className="w-full p-2 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="e.g., Main Quest, Side Quest"
             />
           </div>
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-300 mb-1">Description</label>
+            <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">Description</label>
             <textarea
               id="description"
               name="description"
               value={sessionForm.description}
               onChange={handleFormChange}
               rows={4}
-              className="w-full p-2 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="A brief description of the session's objectives."
             />
           </div>
