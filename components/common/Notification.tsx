@@ -16,7 +16,7 @@ const Notification: React.FC<NotificationProps> = ({ notification, onDismiss }) 
     return () => clearTimeout(timer);
   }, [notification, onDismiss]);
 
-  const baseClasses = 'fixed top-5 right-5 z-50 p-4 rounded-lg shadow-lg flex items-center max-w-sm animate-fade-in-down';
+  const baseClasses = 'p-4 rounded-lg shadow-lg flex items-center max-w-sm animate-fade-in-down';
   const typeClasses = {
     success: 'bg-green-500 text-white',
     error: 'bg-red-500 text-white',
@@ -33,7 +33,7 @@ const Notification: React.FC<NotificationProps> = ({ notification, onDismiss }) 
 
 export const NotificationContainer: React.FC<{ notifications: NotificationType[], onDismiss: (id: number) => void }> = ({ notifications, onDismiss }) => {
     return (
-        <div className="fixed top-5 right-5 z-50 space-y-2">
+        <div className="fixed top-16 right-5 z-50 space-y-2">
             {notifications.map(note => (
                 <Notification key={note.id} notification={note} onDismiss={onDismiss} />
             ))}

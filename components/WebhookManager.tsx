@@ -43,11 +43,11 @@ const WebhookManager: React.FC<{ showNotification: (type: 'success' | 'error' | 
       case 'send':
         return (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-white">Send New Message</h3>
+            <h3 className="text-lg font-semibold text-gray-900">Send New Message</h3>
             <textarea
               rows={5}
               placeholder="Enter your message here. Markdown is supported."
-              className="w-full p-2 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={sendContent}
               onChange={e => setSendContent(e.target.value)}
             />
@@ -57,18 +57,18 @@ const WebhookManager: React.FC<{ showNotification: (type: 'success' | 'error' | 
       case 'edit':
         return (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-white">Edit Existing Message</h3>
+            <h3 className="text-lg font-semibold text-gray-900">Edit Existing Message</h3>
             <input
               type="text"
               placeholder="Message ID"
-              className="w-full p-2 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={editId}
               onChange={e => setEditId(e.target.value)}
             />
             <textarea
               rows={5}
               placeholder="Enter the new message content."
-              className="w-full p-2 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={editContent}
               onChange={e => setEditContent(e.target.value)}
             />
@@ -78,21 +78,21 @@ const WebhookManager: React.FC<{ showNotification: (type: 'success' | 'error' | 
       case 'get':
         return (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-white">Get Message Content</h3>
+            <h3 className="text-lg font-semibold text-gray-900">Get Message Content</h3>
             <div className="flex gap-2">
               <input
                 type="text"
                 placeholder="Message ID"
-                className="w-full p-2 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={getId}
                 onChange={e => setGetId(e.target.value)}
               />
               <Button onClick={() => handleAction('get')} isLoading={loading.get}>Get Message</Button>
             </div>
             {retrievedContent && (
-              <div className="mt-4 p-4 bg-gray-900/50 rounded-lg border border-gray-600">
-                <h4 className="font-semibold text-gray-300 mb-2">Retrieved Content:</h4>
-                <p className="text-gray-200 whitespace-pre-wrap">{retrievedContent}</p>
+              <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <h4 className="font-semibold text-gray-700 mb-2">Retrieved Content:</h4>
+                <p className="text-gray-700 whitespace-pre-wrap">{retrievedContent}</p>
               </div>
             )}
           </div>
@@ -105,8 +105,8 @@ const WebhookManager: React.FC<{ showNotification: (type: 'success' | 'error' | 
       onClick={() => setActiveTab(tabId)}
       className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-colors ${
         activeTab === tabId
-          ? 'bg-gray-800 text-blue-400 border-b-2 border-blue-400'
-          : 'text-gray-400 hover:text-white'
+          ? 'bg-white text-blue-500 border-b-2 border-blue-500'
+          : 'text-gray-600 hover:text-gray-900'
       }`}
     >
       {children}
@@ -115,8 +115,8 @@ const WebhookManager: React.FC<{ showNotification: (type: 'success' | 'error' | 
 
   return (
     <div className="animate-fade-in">
-      <h1 className="text-3xl font-bold mb-6 text-white">Webhook Manager</h1>
-      <div className="flex border-b border-gray-700">
+      <h1 className="text-3xl font-semibold mb-6">Webhook Manager</h1>
+      <div className="flex border-b border-gray-200">
         <TabButton tabId="send">Send</TabButton>
         <TabButton tabId="edit">Edit</TabButton>
         <TabButton tabId="get">Get</TabButton>
