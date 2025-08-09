@@ -16,24 +16,23 @@ const Notification: React.FC<NotificationProps> = ({ notification, onDismiss }) 
     return () => clearTimeout(timer);
   }, [notification, onDismiss]);
 
-  const baseClasses = 'fixed top-5 right-5 z-50 p-4 rounded-lg shadow-lg flex items-center max-w-sm animate-fade-in-down';
   const typeClasses = {
-    success: 'bg-green-500 text-white',
-    error: 'bg-red-500 text-white',
-    info: 'bg-blue-500 text-white',
+    success: 'bg-success text-white',
+    error: 'bg-error text-white',
+    info: 'bg-info text-white',
   };
 
   return (
-    <div className={`${baseClasses} ${typeClasses[notification.type]}`}>
+    <div className={`p-4 rounded-xl shadow-lg flex items-center max-w-sm animate-fade-in-down ${typeClasses[notification.type]}`}>
       <div className="flex-1 mr-4">{notification.message}</div>
-      <button onClick={() => onDismiss(notification.id)} className="text-lg font-bold leading-none">&times;</button>
+      <button onClick={() => onDismiss(notification.id)} className="text-lg font-bold leading-none opacity-70 hover:opacity-100 transition-opacity">&times;</button>
     </div>
   );
 };
 
 export const NotificationContainer: React.FC<{ notifications: NotificationType[], onDismiss: (id: number) => void }> = ({ notifications, onDismiss }) => {
     return (
-        <div className="fixed top-5 right-5 z-50 space-y-2">
+        <div className="fixed top-5 right-5 z-50 space-y-3">
             {notifications.map(note => (
                 <Notification key={note.id} notification={note} onDismiss={onDismiss} />
             ))}

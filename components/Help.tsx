@@ -42,16 +42,16 @@ const helpData = [
 const AccordionItem: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="border-b border-gray-700">
+    <div className="border-b border-surface-border">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex justify-between items-center p-4 text-left text-lg font-semibold text-white hover:bg-gray-700/50"
+        className="w-full flex justify-between items-center p-4 text-left text-lg font-semibold text-text-primary hover:bg-surface-border/50"
       >
         <span>{title}</span>
         <span className={`transform transition-transform duration-200 ${isOpen ? 'rotate-180' : 'rotate-0'}`}>▼</span>
       </button>
       {isOpen && (
-        <div className="p-4 bg-gray-900/50">
+        <div className="p-4 bg-background/50">
           {children}
         </div>
       )}
@@ -62,8 +62,8 @@ const AccordionItem: React.FC<{ title: string; children: React.ReactNode }> = ({
 const Help: React.FC = () => {
   return (
     <div className="animate-fade-in">
-      <h1 className="text-3xl font-bold mb-6 text-white">Help & Documentation</h1>
-      <p className="text-gray-300 mb-6">
+      <h1 className="text-3xl font-bold mb-6 text-text-primary">Help & Documentation</h1>
+      <p className="text-text-secondary mb-6">
         This section provides a quick reference for all available commands and dashboard features.
       </p>
       <Card className="p-0">
@@ -72,8 +72,8 @@ const Help: React.FC = () => {
             <ul className="space-y-3">
               {category.commands.map((command) => (
                 <li key={command.name}>
-                  <p className="font-mono text-blue-400 bg-gray-800 px-2 py-1 rounded inline-block">/{command.name}</p>
-                  <p className="text-gray-300 mt-1 ml-2">{command.description}</p>
+                  <p className="font-mono text-primary bg-surface-border px-2 py-1 rounded-lg inline-block">/{command.name}</p>
+                  <p className="text-text-secondary mt-1 ml-2">{command.description}</p>
                 </li>
               ))}
             </ul>
