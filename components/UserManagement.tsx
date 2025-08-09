@@ -62,49 +62,49 @@ const UserManagement: React.FC<{ showNotification: (type: 'success' | 'error' | 
 
   return (
     <div className="animate-fade-in">
-      <h1 className="text-3xl font-bold mb-6 text-white">User Management</h1>
+      <h1 className="text-3xl font-bold mb-6 text-text-primary">User Management</h1>
       <Card>
         <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-4">
           <input
             type="text"
             placeholder="Search by Discord or Character Name..."
-            className="w-full md:w-1/2 p-2 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full md:w-1/2 p-2 rounded-xl bg-surface-border border-transparent focus:outline-none focus:ring-2 focus:ring-primary"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <div className="flex gap-2">
             <Button onClick={() => setIsModalOpen(true)} variant="danger">Unregister User</Button>
-            <Button onClick={handleExport} isLoading={loading.export}>Export CSV</Button>
+            <Button onClick={handleExport} isLoading={loading.export} variant="secondary">Export CSV</Button>
           </div>
         </div>
         <div className="overflow-x-auto">
-          <table className="min-w-full bg-gray-800">
+          <table className="min-w-full">
             <thead>
-              <tr className="border-b border-gray-700">
-                <th className="text-left p-3 text-sm font-semibold tracking-wide text-gray-300">Discord Username</th>
-                <th className="text-left p-3 text-sm font-semibold tracking-wide text-gray-300">Character Name</th>
-                <th className="text-left p-3 text-sm font-semibold tracking-wide text-gray-300">Registration Date</th>
+              <tr className="border-b border-surface-border">
+                <th className="text-left p-3 text-sm font-semibold tracking-wide text-text-secondary">Discord Username</th>
+                <th className="text-left p-3 text-sm font-semibold tracking-wide text-text-secondary">Character Name</th>
+                <th className="text-left p-3 text-sm font-semibold tracking-wide text-text-secondary">Registration Date</th>
               </tr>
             </thead>
             <tbody>
-              {filteredUsers.map((user) => (
-                <tr key={user.id} className="border-b border-gray-700 hover:bg-gray-700/50 transition-colors">
-                  <td className="p-3 text-sm text-white">{user.discordUsername}</td>
-                  <td className="p-3 text-sm text-gray-300">{user.characterName}</td>
-                  <td className="p-3 text-sm text-gray-400">{user.registrationDate}</td>
+              {filteredUsers.map((user, index) => (
+                <tr key={user.id} className={`border-b border-surface-border transition-colors ${index % 2 === 0 ? 'bg-surface' : 'bg-surface/50'} hover:bg-surface-border`}>
+                  <td className="p-3 text-sm text-text-primary">{user.discordUsername}</td>
+                  <td className="p-3 text-sm text-text-secondary">{user.characterName}</td>
+                  <td className="p-3 text-sm text-text-tertiary">{user.registrationDate}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        {filteredUsers.length === 0 && <p className="text-center p-4 text-gray-500">No users found.</p>}
+        {filteredUsers.length === 0 && <p className="text-center p-4 text-text-tertiary">No users found.</p>}
       </Card>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Manually Unregister User">
-        <p className="mb-4 text-gray-300">Enter the Discord Username or ID of the user you wish to unregister. This action is irreversible.</p>
+        <p className="mb-4 text-text-secondary">Enter the Discord Username or ID of the user you wish to unregister. This action is irreversible.</p>
         <input
           type="text"
           placeholder="User#1234 or ID"
-          className="w-full p-2 rounded-lg bg-gray-700 border border-gray-600 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-2 rounded-xl bg-surface-border border-transparent mb-4 focus:outline-none focus:ring-2 focus:ring-primary"
           value={userToUnregister}
           onChange={(e) => setUserToUnregister(e.target.value)}
         />

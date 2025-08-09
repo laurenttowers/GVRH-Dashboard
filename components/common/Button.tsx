@@ -15,12 +15,13 @@ const Button: React.FC<ButtonProps> = ({
   isLoading = false,
   ...props
 }) => {
-  const baseClasses = 'rounded-lg font-semibold transition-all duration-200 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed';
+  const baseClasses = 'rounded-xl font-semibold transition-all duration-200 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed';
 
   const variantClasses = {
-    primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500',
-    secondary: 'bg-gray-600 text-white hover:bg-gray-700 focus:ring-gray-500',
-    danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500',
+    primary: 'bg-primary text-white hover:bg-primary-hover focus:ring-primary',
+    secondary: 'bg-surface-border text-text-primary hover:bg-gray-700 focus:ring-gray-500',
+    danger: 'bg-error text-white hover:bg-red-700 focus:ring-red-500',
+    subtle: 'bg-transparent text-text-primary hover:bg-surface-border'
   };
 
   const sizeClasses = {

@@ -56,18 +56,18 @@ const App: React.FC = () => {
 
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-900">
-        <div className="text-center p-8 bg-gray-800 rounded-lg shadow-xl border border-gray-700">
-          <h1 className="text-3xl font-bold text-white mb-2">GVRH-Bot Admin</h1>
-          <p className="text-gray-400 mb-6">Please log in to continue.</p>
-          <Button onClick={handleLogin}>Login with Discord</Button>
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center p-8 bg-surface rounded-2xl shadow-card border border-surface-border">
+          <h1 className="text-3xl font-bold text-text-primary mb-2">GVRH-Bot Admin</h1>
+          <p className="text-text-secondary mb-6">Please log in to continue.</p>
+          <Button onClick={handleLogin} variant="primary">Login with Discord</Button>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="flex h-screen bg-gray-900 text-gray-100">
+    <div className="flex h-screen bg-background text-text-primary">
       <NotificationContainer notifications={notifications} onDismiss={dismissNotification} />
       <Sidebar currentView={view} setView={setView} onLogout={handleLogout} />
       <main className="flex-1 p-6 md:p-10 overflow-y-auto">
@@ -89,10 +89,10 @@ const NavItem: React.FC<{
     <a
       href="#"
       onClick={(e) => { e.preventDefault(); setView(viewName); }}
-      className={`flex items-center p-3 my-1 rounded-lg transition-colors ${
+      className={`flex items-center p-3 my-1 rounded-xl transition-all duration-200 ease-in-out ${
         currentView === viewName
-          ? 'bg-blue-600 text-white'
-          : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+          ? 'bg-primary text-white shadow-lg'
+          : 'text-text-secondary hover:bg-surface-border hover:text-text-primary'
       }`}
     >
       {icon}
@@ -116,8 +116,8 @@ const Sidebar: React.FC<{
     ];
     
   return (
-    <aside className="w-64 bg-gray-800 border-r border-gray-700 flex flex-col p-4">
-      <div className="text-2xl font-bold text-white mb-8 px-2">GVRH-Bot</div>
+    <aside className="w-64 bg-surface border-r border-surface-border flex flex-col p-4">
+      <div className="text-2xl font-bold text-text-primary mb-8 px-2">GVRH-Bot</div>
       <nav className="flex-1">
         <ul>
             {navItems.map(item => (
@@ -136,7 +136,7 @@ const Sidebar: React.FC<{
         <a
           href="#"
           onClick={(e) => { e.preventDefault(); onLogout(); }}
-          className="flex items-center p-3 my-1 rounded-lg text-red-400 hover:bg-red-500 hover:text-white transition-colors"
+          className="flex items-center p-3 my-1 rounded-xl text-error hover:bg-error hover:text-white transition-colors duration-200"
         >
           <LogoutIcon className="w-6 h-6" />
           <span className="ml-3 font-medium">Logout</span>
